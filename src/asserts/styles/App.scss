@@ -1,0 +1,451 @@
+@import "global";
+@import "mixins";
+@import "vars";
+@import "fonts";
+
+body {
+  color: $font-color;
+  font-family: "RobotoRegular";
+}
+.App {
+  background-color: $bg-color;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1920px;
+  width: 100%;
+  padding: 0 2rem;
+  margin: 0 auto;
+  flex-grow: 1;
+}
+
+.header {
+  font-size: 2rem;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+.helper {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #0fc709;
+  &_text {
+    @include createSmallIcon("../icons/info.svg");
+  }
+}
+.create {
+  &_toggle-on,
+  &_toggle-off {
+    width: 5rem;
+  }
+  &_toggle-on {
+    @include createSmallIcon("../icons/plus.svg");
+    &::before {
+      transform: translateY(50%);
+      left: 0.5rem;
+    }
+  }
+}
+.nav {
+  &_list {
+    display: flex;
+    column-gap: 2rem;
+    height: 2rem;
+    align-items: center;
+  }
+  &_list__item,
+  &_list__item a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  &_list__item button {
+    line-height: 1.3;
+  }
+}
+.main {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  row-gap: 1rem;
+  &_welcome {
+    @include centering;
+    @include createBlure(30px);
+    @include createBorder(2px, #24c5db);
+    @include limitSize(600px, 250px, 50%);
+    padding: 40px;
+    font-size: $fons-size-xl;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  &_start {
+    @include createBlure(30px);
+    @include createBorder(2px, #24c5db);
+    @include limitSize(320px, 60px);
+    padding: 10px 0;
+    font-size: $fons-size-lg;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: inherit;
+    color: $font-color;
+  }
+}
+
+.page_slider {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  column-gap: 2rem;
+  height: 1.5rem;
+  &__prev,
+  &__next {
+    width: 3rem;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    column-gap: 5px;
+    width: 10rem;
+  }
+  &__item button {
+    border: none;
+    background-color: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #1976d2;
+  }
+
+  &__next,
+  &__prev {
+    width: 2rem;
+    border: none;
+    background-color: inherit;
+    @include createImg("../icons/arrow-right.svg", contain);
+  }
+  &__next:active,
+  &__prev:active {
+    border: 1px solid green;
+  }
+  &__prev {
+    transform: rotateY(180deg);
+  }
+}
+
+.table {
+  text-align: left;
+  &_head,
+  &_row {
+    display: flex;
+  }
+  &_row {
+    width: 100%;
+    align-items: flex-end;
+  }
+  &_head {
+    font-size: 1rem;
+    font-weight: bold;
+    border-bottom: 1px solid #726e6e;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  &_body {
+    row-gap: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 1rem;
+  }
+  &_delete,
+  &_data {
+    align-self: center;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 4rem;
+  background-color: $bg-color;
+  font-size: $fons-size-md;
+  padding: 1rem 2rem;
+  border-top: 1px solid #000;
+  margin-top: 1rem;
+  & .github_logo {
+    @include createSmallIcon("../icons/github.svg");
+  }
+}
+.logo_img {
+  height: 100%;
+}
+
+.menu {
+  display: flex;
+  flex-grow: 1;
+  height: calc(100% - 4rem);
+  column-gap: 2rem;
+  flex-wrap: wrap;
+  &_header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.car {
+  &_create {
+    display: flex;
+    height: 4rem;
+    column-gap: 1rem;
+    align-items: flex-end;
+  }
+  &_create__form {
+    display: flex;
+    align-items: flex-end;
+    column-gap: 1rem;
+  }
+  &_create__toggle {
+    display: flex;
+    column-gap: 1rem;
+  }
+  &_create__input-color {
+    appearance: none;
+    cursor: pointer;
+    height: 2.5rem;
+    width: 2.5rem;
+    border: none;
+    background-color: transparent;
+    &::-webkit-color-swatch {
+      border-radius: 50%;
+      border: 2px solid #000;
+    }
+  }
+  &_create__confirm {
+    @include createSmallIcon("../icons/checkmark.svg");
+    &::before {
+      transform: translateY(50%);
+      left: 0.5rem;
+    }
+  }
+  &_item__id,
+  &_item__name {
+    width: 3rem;
+    padding: 0 1rem;
+  }
+  &_item__id {
+    text-align: center;
+  }
+  &_item__color.table_data {
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    padding-right: 5%;
+    &::after {
+      position: absolute;
+      content: "";
+      right: 20%;
+      top: 0;
+      @include createImg("../icons/flag.svg");
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+  &_item__name {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    width: 15rem;
+    overflow: hidden;
+  }
+  &_engine {
+    display: flex;
+    width: 100%;
+    column-gap: 1rem;
+  }
+  &_engine__start {
+    background-color: #3edd7b;
+  }
+  &_engine__stop {
+    background-color: #dd3e3e;
+  }
+  &_engine__start,
+  &_engine__stop {
+    color: #fff;
+    border-radius: 1rem;
+    padding: 2px 10px;
+  }
+  &_engine__start:disabled,
+  &_engine__stop:disabled {
+    background-color: rgb(112, 112, 112);
+  }
+
+  &_table {
+    border: 1px solid #726e6e;
+    border-radius: 1rem;
+    height: 580px;
+  }
+  &_name {
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: hidden;
+    input[type="text"],
+    span {
+      width: 100%;
+      display: inline-block;
+      position: relative;
+      height: 2.2rem;
+    }
+  }
+  &_color {
+    input[type="text"],
+    span {
+      width: 100%;
+      display: inline-block;
+      position: relative;
+      height: 2.2rem;
+    }
+  }
+  &_image-svg {
+    width: 40px;
+    position: absolute;
+    content: "";
+    left: 0;
+  }
+  &_count {
+    display: flex;
+    justify-content: space-between;
+  }
+  &_race__container {
+    display: flex;
+    column-gap: 1rem;
+  }
+  &_item__delete button {
+    width: 2rem;
+    height: 1.5rem;
+    background-color: inherit;
+    border: none;
+    @include createIcon("../icons/bin.svg");
+    &::before {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  &_item__delete button:active {
+    border: 1px solid red;
+  }
+}
+.winners {
+  &_table {
+    border: 1px solid #726e6e;
+    border-radius: 1rem;
+    border-spacing: 0px;
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+  &_table thead {
+    height: 3rem;
+  }
+  &_table th,
+  &_table td {
+    max-width: 13rem;
+    padding: 0 1rem;
+    padding-top: 0.5rem;
+  }
+  &_table th {
+    border-bottom: 1px solid #726e6e;
+  }
+  &_table tr:not(:last-child) td {
+    border-bottom: 1px solid #726e6e;
+  }
+  &_total {
+    margin-bottom: 1rem;
+  }
+}
+.sort {
+  &_id-asc,
+  &_id-desc,
+  &_wins-asc,
+  &_wins-desc,
+  &_time-asc,
+  &_time-desc {
+    width: 2rem;
+    height: 1.2rem;
+    background-color: inherit;
+    margin-left: 1rem;
+    border: none;
+  }
+}
+.winner {
+  &_show-container {
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (max-width: 750px) {
+  .container {
+    padding: 0 1rem;
+  }
+  .MuiButton-root.MuiButtonBase-root {
+    line-height: 1;
+    font-size: 0.7rem;
+  }
+  .helper {
+    font-size: 1rem;
+  }
+  .car {
+    &_create {
+      height: auto;
+      flex-wrap: wrap;
+    }
+
+    &_create__form {
+      column-gap: 0.5rem;
+    }
+    &_engine {
+      column-gap: 0.5rem;
+    }
+    &_create__toggle {
+      width: 100%;
+    }
+    &_create__form {
+      width: 100%;
+    }
+  }
+  .create_toggle-on::before,
+  .car_create__confirm::before {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+  .winner_show-container {
+    font-size: 1.25rem;
+    margin: 1rem auto;
+  }
+  .winners {
+    &_table {
+      width: 100%;
+    }
+    &_table th,
+    &_table td {
+      max-width: 13rem;
+      padding: 0 0.5rem;
+    }
+  }
+  .sort {
+    &_id-asc,
+    &_id-desc,
+    &_wins-asc,
+    &_wins-desc,
+    &_time-asc,
+    &_time-desc {
+      width: 1.5rem;
+      height: 1rem;
+      background-color: inherit;
+      border: none;
+      margin-left: 0;
+    }
+  }
+}
